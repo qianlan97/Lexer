@@ -1,3 +1,7 @@
+import java.util.Iterator;
+import java.util.HashMap;
+
+
 public class Parser
 {
     public static final int PRINT       = 10; // "print"
@@ -78,6 +82,86 @@ public class Parser
             default: return "error";
         }
     }
+//
+//    public class SymbolTable<Key,Value>{
+//        private Node head;
+//        private int N;
+//        public SymbolTable(){
+//            head=new Node(null,null,null);
+//            N=0;
+//        }
+//
+//        public class Node{
+//            private Key key;
+//            private Value value;
+//            private Node next;
+//            public Node(Key key,Value value,Node next){
+//                this.key=key;
+//                this.value=value;
+//                this.next=next;
+//            }
+//        }
+//
+//        public int size(){
+//            return N;
+//        }
+//
+//        public void put(Key key,Value value){
+//            Node node=head;
+//            while (node.next!=null){
+//                node=node.next;
+//                if (node.key==key){
+//                    node.value=value;
+//                    N++;
+//                    return;
+//                }
+//            }
+//
+//            Node newNode=new Node(key,value,null);
+//            node.next=newNode;
+//            N++;
+//        }
+//
+//        public Value get(Key key){
+//            Node node=head;
+//            while (node.next!=null){
+//                node=node.next;
+//                if (node.key==key){
+//                    return node.value;
+//                }
+//            }
+//            return null;
+//        }
+//
+//        public void delete(Key key){
+//            Node node=head;
+//            while (node.next!=null){
+//                if (node.next.key==key){
+//                    node.next=node.next.next;
+//                    N--;
+//                    return;
+//                }
+//                node=node.next;
+//            }
+//        }
+//
+//        public boolean contains(Key key){
+//            Node node =head;
+//            while (node.next!=null){
+//                if (node.key == key) {
+//                    return true;
+//                }
+//                node = node.next;
+//            }
+//            return false;
+//        }
+//
+//        public boolean isEmpty(){
+//            return N==0;
+//        }
+//
+//    }
+
 
     public Parser(java.io.Reader r) throws java.io.IOException
     {
@@ -103,12 +187,19 @@ public class Parser
                 return -1;
             }
 
+            HashMap<String, Integer> ID = new HashMap<String, Integer>();
+            ID.put("main",0);
+            ID.put("a",1);
+            ID.put("b",2);
+            ID.put("c",3);
+            ID.put("d",4);
+
             Object attr = yylval.obj;
             String tokenName = type(token);
             if (attr == null) {
                 System.out.print("<" + tokenName + " :" + (lexer.yyline+1) + ":" + (lexer.yycolumn+1) + ">");
             } else {
-                System.out.print("<" + tokenName + ", " + attr + " :" + (lexer.yyline+1) + ":" + (lexer.yycolumn+1) + ">");
+                System.out.print("<<symbol table entity [" + ID.get(tokenName) + ", " + tokenName + "]>><ID, " + ID.get(tokenName) + " :" + (lexer.yyline+1) + ":" + (lexer.yycolumn+1) + ">");
             }
         }
     }
