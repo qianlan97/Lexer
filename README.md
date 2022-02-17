@@ -1,7 +1,7 @@
 # Lexer program
 
 ## How to build
-###This project is built in Intellij
+### This project is built in Intellij
 ### If you don't have the Lexer.java file
 1. Enter "src" directory and run in terminal as follows:
    `java -jar jflex-1.6.1.jar Lexer.flex`
